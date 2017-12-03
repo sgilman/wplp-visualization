@@ -1,0 +1,82 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script src="d3plus.v2.js"></script>
+
+<body>
+
+</body>
+<script src="west_philly_data.json"></script>
+<script>
+
+			
+
+			var selectedId = "G4201010008000";
+			var var_name = "Vacant";
+			var normalization = "Units";
+			
+			drawLineGraph (selectedId, var_name, normalization);
+		
+		
+		// draws line graph of census tracts. shows variable specified by var_name ("White", "Black", "Asian", "Pov", "Vacant") normalized by normalization ("Persons" for race and poverty variables, "Units" for vacancy. Line for selected tract (selectedId) will be red, more opaque, and wider than other lines, if specified 		
+		function drawLineGraph (selectedId, var_name, normalization) {	
+			var line_data_1 = [];
+			var line_data_2 = [];
+			var years = [1970, 1980, 1990, 2000, 2010];
+			
+			// adds one object (pointData) per point to be displayed on line graph. x is the year of measurement, y is the variable divided by the normalization * 100, the id is the NHGISCODE - unique for each census tract in the array line_data_1. 
+			
+			west_philly_data.forEach(function(d) {
+				years.forEach( function(year) {
+					var yy = String(year).slice(-2);
+					var pointData = {id: d["NHGISCODE"], x: year, y: d[var_name + yy]/d[normalization + yy] * 100};
+				
+					// any year with null value is excluded
+					if (d[var_name + yy]) {
+					
+						// If there is a selected tract, it is added to array line_data_2 to be appended at the end (which in theory makes it draw on top of the other lines) 
+						if (d["NHGISCODE"] == selectedId) {
+							line_data_2.push(pointData);
+						} else {
+							line_data_1.push(pointData);
+						}
+					}
+				
+				});
+			});
+				
+						
+			var linechart = new d3plus.LinePlot()
+			  .data(line_data_1.concat(line_data_2))
+			  .groupBy("id")
+			  .shapeConfig({
+					// for selected tract, line is set to red stroke, 3 width, and 1 opacity. other tracts set to gray stroke, 1 width, and 0.5 opacity.
+					Line: {
+						stroke: function(d) {
+							if (d.id == selectedId) {
+								return "red"
+							} else {
+								return "gray"
+							}
+						},
+						strokeWidth: function(d) {
+							if (d.id == selectedId) {
+								return 3
+							} else {
+								return 1
+							}
+						},
+						opacity: function(d) {
+							if (d.id == selectedId) {
+								return 1
+							} else {
+								return 0.5
+							}
+						}						
+					}
+				})
+			  .render();
+			}
+
+</script>
+
