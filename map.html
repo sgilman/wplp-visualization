@@ -2,7 +2,9 @@
   <head>
     <title>MAS.S70 | D3 workshop</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
-	<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.css' rel='stylesheet' />
+<!--	<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' /> -->
     <style>
 		#map {
 			width:100%;
@@ -14,20 +16,49 @@
   <body>
     <div id="map"></div>
    </body>
-	<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+   	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.js'></script>
+<!--	<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script> -->
 	<script src='caveins.geojson'></script>
 		<script>
-			L.mapbox.accessToken = 'pk.eyJ1Ijoic2dpbG1hbiIsImEiOiJjamFycHhkeWE0anY5MndvMnNoNzFqcXNtIn0.s9XSKHZVvjaywQ9P_4ijhw';
-			var map = L.mapbox.map('map', 'mapbox.streets')
-				.setView([39.961784, -75.212501], 13);
-			L.geoJson(caveins, {
+			//instantiate mapbox map
+			mapboxgl.accessToken = 'pk.eyJ1Ijoic2dpbG1hbiIsImEiOiJjamFycHhkeWE0anY5MndvMnNoNzFqcXNtIn0.s9XSKHZVvjaywQ9P_4ijhw';
+			var map = new mapboxgl.Map({
+						container: 'map',
+						style: 'mapbox://styles/mapbox/light-v9',
+						center: [-75.212501, 39.961784,],
+						zoom: 13
+					})
+				.on('load', function () {
+					map.addLayer({
+						'id': 'caveins',
+						'type': 'circle',
+						'source': {
+							'type': 'geojson',
+							'data': caveins
+							},
+						"paint": {
+							"circle-radius": 6,
+							"circle-color": "#B42222"
+						}
+					});			
+				});
+/**				
+			// add cave-in locations as markers	
+			var caveinMarkers = L.geoJson(caveins, {
 				style: function (feature) {
-			return {color: 'red'};
+					return {color: 'red'};
 				},
+				// add popup for caveins displaying "Text" field
 				onEachFeature: function (feature, layer) {
-			layer.bindPopup(feature.properties.Text);
+					layer.bindPopup(feature.properties.Text);
 				}
 			}).addTo(map);
+**/
+
+			
+			map.on('click', 'caveins', function (e) {
+				console.log(e.features[0].properties.gisjoin);
+			});
 	</script>
 
 </html>
