@@ -1,0 +1,52 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="./stylesheet.css">
+</head>
+
+<body>
+
+<div id="outer">
+  <div id="inner1">
+    <p id="p1"></p>
+    <p id="p2"></P>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+  </div>
+  <div id="inner2">
+    <p id="p6"></P>
+  </div>
+  <div id="inner3">
+    <img id="p7" />
+  </div>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+</div>
+
+</body>
+
+<script src="shk.geojson"></script>
+
+<script>
+
+// var data= [
+//   {'ID':'1', 'address':'5160 Hoopes St', 'Latitude':'39.967557', 'Longitude':'-75.224554', 'Year':'1950', 'Title':'Mill Creek Cave-in', 'Casualty':'88', 'Image_File':'abc.jpeg', 'Text':'The area around Rolla may not appear to have much in terms of attractions, but the region is full of outdoor and geologic wonders.  Many of these are located within 15 or 20 miles of Rolla and make for excellent day trips or overnight camping opportunities.  There is much more to see and do in the area even though many UMR students claim there is nothing to do in Rolla.'},
+//   {'ID':'2', 'address':'5160 Hoopes St', 'Latitude':'39.967557', 'Longitude':'-75.224554', 'Year':'1950', 'Title':'Millsssss', 'Casualty':'88', 'Image_File':'abc.jpeg', 'Text':'The area around Rolla may not appear to have much in terms of attractions, but the region is full of outdoor and geologic wonders.  Many of these are located within 15 or 20 miles of Rolla and make for excellent day trips or overnight camping opportunities.  There is much more to see and do in the area even though many UMR students claim there is nothing to do in Rolla.'},
+//   {'ID':'3', 'address':'5160 Hoopes St', 'Latitude':'39.967557', 'Longitude':'-75.224554', 'Year':'1950', 'Title':'Mill Creek Cave-in', 'Casualty':'88', 'Image_File':'abc.jpeg', 'Text':'The area around Rolla may not appear to have much in terms of attractions, but the region is full of outdoor and geologic wonders.  Many of these are located within 15 or 20 miles of Rolla and make for excellent day trips or overnight camping opportunities.  There is much more to see and do in the area even though many UMR students claim there is nothing to do in Rolla.'},
+//   {'ID':'4', 'address':'5160 Hoopes St', 'Latitude':'39.967557', 'Longitude':'-75.224554', 'Year':'1950', 'Title':'Mill Creek Cave-in', 'Casualty':'88', 'Image_File':'abc.jpeg', 'Text':'The area around Rolla may not appear to have much in terms of attractions, but the region is full of outdoor and geologic wonders.  Many of these are located within 15 or 20 miles of Rolla and make for excellent day trips or overnight camping opportunities.  There is much more to see and do in the area even though many UMR students claim there is nothing to do in Rolla.'},
+//   {'ID':'5', 'address':'5160 Hoopes St', 'Latitude':'39.967557', 'Longitude':'-75.224554', 'Year':'1950', 'Title':'Mill Creek Cave-in', 'Casualty':'88', 'Image_File':'abc.jpeg', 'Text':'The area around Rolla may not appear to have much in terms of attractions, but the region is full of outdoor and geologic wonders.  Many of these are located within 15 or 20 miles of Rolla and make for excellent day trips or overnight camping opportunities.  There is much more to see and do in the area even though many UMR students claim there is nothing to do in Rolla.'},
+//   {'ID':'6', 'address':'5160 Hoopes St', 'Latitude':'39.967557', 'Longitude':'-75.224554', 'Year':'1950', 'Title':'Mill Creek Cave-in', 'Casualty':'88', 'Image_File':'abc.jpeg', 'Text':'The area around Rolla may not appear to have much in terms of attractions, but the region is full of outdoor and geologic wonders.  Many of these are located within 15 or 20 miles of Rolla and make for excellent day trips or overnight camping opportunities.  There is much more to see and do in the area even though many UMR students claim there is nothing to do in Rolla.'}
+// ]
+
+d3.select("#inner1").select("#p1").text(caveins.features[0].properties['Title']);
+d3.select("#inner1").select("#p2").text(caveins.features[0].properties['Year']);
+d3.select("#inner1").select("#p3").text(caveins.features[0].properties['address']);
+d3.select("#inner1").select("#p4").text(caveins.features[0].properties['Latitude']);
+d3.select("#inner1").select("#p5").text(caveins.features[0].properties['Longitude']);
+
+d3.select("#inner2").select("#p6").text(caveins.features[0].properties['Text']);
+
+d3.select("#inner3").select("#p7").text(caveins.features[0].properties['Image_File']);
+
+</script>
