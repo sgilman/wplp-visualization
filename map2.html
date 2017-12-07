@@ -116,6 +116,7 @@
 				
 			  linechart.data(line_data_1.concat(line_data_2))
 			  .select('#line-chart')
+			  .tooltip(false)
 			  .groupBy("id")
 			  .shapeConfig({
 					// for selected tract, line is set to red stroke, 3 width, and 1 opacity. other tracts set to gray stroke, 1 width, and 0.5 opacity.
