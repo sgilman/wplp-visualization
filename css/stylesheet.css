@@ -1,0 +1,42 @@
+#p1{
+  font-size: 24px;
+  color: black;
+  font-style: bold;
+  font-family: arial;
+}
+
+#p2{
+  font-size: 14px;
+  color: black;
+  font-style: normal;
+  font-family: sans-serif;
+}
+
+#p3{
+  font-size: 14px;
+  color: black;
+  font-style: normal;
+  font-family: sans-serif;
+}
+
+#p4{
+  font-size: 14px;
+  color: black;
+  font-style: normal;
+  font-family: sans-serif;
+}
+
+#p5{
+  font-size: 14px;
+  color: black;
+  font-style: normal;
+  font-family: sans-serif;
+}
+
+#description{
+  background-color: #E8E8E8;
+  font-size: 15px;
+  color: #696969;
+  font-style: italic;
+  font-family: sans-serif;
+}
