@@ -118,7 +118,7 @@
 
     d3.select("#description").text(caveins.features[0].properties['Text']);
 
-    d3.select("#p7").text(caveins.features[0].properties['Image_File']);
+    d3.select("#p7").attr('src', 'img/' + caveins.features[0].properties['Image_File']);
 
     </script>
     <script>
@@ -160,7 +160,20 @@
 
       map.on('click', 'caveins', function (e) {
         console.log(e.features[0].properties.gisjoin);
+		
         drawLineGraph(e.features[0].properties.gisjoin, "Vacant", "Units", false);
+		
+		d3.select("#p1").text(e.features[0].properties['Title']);
+		d3.select("#p2").text(e.features[0].properties['Year']);
+		d3.select("#p3").text(e.features[0].properties['address']);
+		d3.select("#p4").text(e.features[0].properties['Latitude']);
+		d3.select("#p5").text(e.features[0].properties['Longitude']);
+
+		d3.select("#description").text(e.features[0].properties['Text']);
+
+		d3.select("#p7").attr('src', 'img/' + e.features[0].properties['Image_File']);
+		
+		
       });
 
 
