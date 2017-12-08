@@ -25,7 +25,7 @@
       width: 100%;
       }
     #line-chart {
-      height: 100%;
+      height: 90%;
       width: 100%;
       }
     .mapboxgl-canvas {
@@ -45,7 +45,11 @@
           <header class="masthead clearfix">
             <div class="row" >
               <div class="col-sm-8"><div id="map"></div></div>
-          	  <div class="col-sm-4"><div id="line-chart"></div></div>
+          	  <div class="col-sm-4">
+					<button type="button" variable="Black" normalization="Persons" class="btn btn-primary" autofocus="autofocus">% black</button>
+					<button type="button" variable="Pov" normalization="Persons" class="btn btn-primary">Poverty rate</button>
+					<button type="button" variable="Vacant" normalization="Units" class="btn btn-primary">Vacancy rate</button>
+					<div id="line-chart"></div></div>
             </div>
             <!--
             <div class="inner">
@@ -124,6 +128,16 @@
 
     </script>
     <script>
+	
+
+      var selectedId = "G4201010008000";
+      var var_name = "Black";
+      var normalization = "Persons";
+      var linechart = new d3plus.LinePlot();
+
+      drawLineGraph (selectedId, var_name, normalization, true);
+	
+	
       //instantiate mapbox map
       mapboxgl.accessToken = 'pk.eyJ1Ijoic2dpbG1hbiIsImEiOiJjamFycHhkeWE0anY5MndvMnNoNzFqcXNtIn0.s9XSKHZVvjaywQ9P_4ijhw';
       var map = new mapboxgl.Map({
@@ -207,11 +221,13 @@
 
       map.on('click', 'caveins', function (e) {
 	  
+		selectedId = e.features[0].properties['gisjoin'];
+	  
 		map.setFilter("caveins-selected", ["==", "ID", e.features[0].properties.ID]);
 
         console.log(e.features[0].properties.gisjoin);
 		
-        drawLineGraph(e.features[0].properties.gisjoin, "Vacant", "Units", false);
+        drawLineGraph(e.features[0].properties.gisjoin, var_name, normalization, false);
 		
 		d3.select("#p1").text(e.features[0].properties['Title']);
 		d3.select("#p2").text(e.features[0].properties['Year']);
@@ -235,13 +251,6 @@
 
 
 
-
-      var selectedId = "G4201010008000";
-      var var_name = "Vacant";
-      var normalization = "Units";
-      var linechart = new d3plus.LinePlot();
-
-      drawLineGraph (selectedId, var_name, normalization, true);
 
 
 
@@ -307,6 +316,12 @@
         })
         .render();
       }
+	  
+	  d3.selectAll('button').on('click', function() {
+		var_name = d3.select(this).attr('variable');		
+		normalization = d3.select(this).attr('normalization');
+		drawLineGraph(selectedId, var_name, normalization, false)
+	});
   </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
