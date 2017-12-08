@@ -174,7 +174,22 @@
               "circle-radius": 6,
               "circle-color": "#B42222"
             }
-          });
+          })
+		  .addLayer({
+            'id': 'caveins-selected',
+            'type': 'circle',
+            'source': {
+              'type': 'geojson',
+              'data': caveins
+              },
+            "paint": {
+              "circle-radius": 12,
+              "circle-color": "#B42222"
+            },
+			"filter" : ['==', 'ID', '']
+          })
+		  
+		  ;
         });
 /**
       // add cave-in locations as markers
@@ -191,6 +206,9 @@
 
 
       map.on('click', 'caveins', function (e) {
+	  
+		map.setFilter("caveins-selected", ["==", "ID", e.features[0].properties.ID]);
+
         console.log(e.features[0].properties.gisjoin);
 		
         drawLineGraph(e.features[0].properties.gisjoin, "Vacant", "Units", false);
@@ -207,6 +225,13 @@
 		
 		
       });
+	  
+	map.on('mouseenter', 'caveins', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', 'caveins', function () {
+        map.getCanvas().style.cursor = '';
+    });
 
 
 
