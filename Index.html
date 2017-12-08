@@ -44,8 +44,8 @@
 
           <header class="masthead clearfix">
             <div class="row" >
-              <div class="col-sm-9"><div id="map"></div></div>
-          	  <div class="col-sm"><div id="line-chart"></div></div>
+              <div class="col-sm-8"><div id="map"></div></div>
+          	  <div class="col-sm-4"><div id="line-chart"></div></div>
             </div>
             <!--
             <div class="inner">
@@ -98,6 +98,8 @@
     <script src="https://d3plus.org/js/d3.js"></script>
     <script src="js/d3plus.v2.js"></script>
     <script src="caveins.geojson"></script>
+	<script src="js/watershed.geojson"></script>
+	<script src="js/creek.geojson"></script>
     <script src="west_philly_data.json"></script>
     <script>
 
@@ -132,6 +134,36 @@
           })
         .on('load', function () {
           map.addLayer({
+			'id': 'watershed',
+			'type': 'fill',
+			'source': {
+				'type': 'geojson',
+				'data': watershed
+				},
+			'layout': {},
+			'paint': {
+				'fill-color':'#4250f4',
+				'fill-opacity': 0.5
+					}
+				})	  
+			.addLayer({
+				'id': 'creek',
+				'type': 'line',
+				'source': {
+					'type': 'geojson',
+					'data': creek
+					},
+				"layout": {
+					"line-join": "round",
+					"line-cap": "round"
+				},
+				"paint": {
+					"line-color": "#030e96",
+					"line-width": 3,
+					"line-opacity": 0.8
+				}
+				})	
+		  .addLayer({
             'id': 'caveins',
             'type': 'circle',
             'source': {
