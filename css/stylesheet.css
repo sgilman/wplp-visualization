@@ -34,6 +34,10 @@
 }
 
 #description{
+  padding-top: .25cm;
+  padding-left: .25cm;
+  padding-bottom: .25cm;
+  padding-right: .25cm;
   background-color: #E8E8E8;
   font-size: 15px;
   color: #696969;
